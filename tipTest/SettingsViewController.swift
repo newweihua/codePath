@@ -18,6 +18,16 @@ class SettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        let maxTipP = defaults.object(forKey: "maxTipPercent") as? String ?? "50"
+        let maxSplit = defaults.object(forKey: "maxSplitNumber") as? String ?? "4"
+        
+        maxTipPercent.text = maxTipP
+        maxSplitNumber.text = maxSplit
+        super.viewWillAppear(animated)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         let defaults = UserDefaults.standard
         

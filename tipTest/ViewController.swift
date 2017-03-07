@@ -28,11 +28,11 @@ class ViewController: UIViewController {
         let maxTipPercent = defaults.object(forKey: "maxTipPercent") as? String ?? "50"
         print(maxTipPercent)
         
-        tipPercent.maximumValue = Float(maxTipPercent)!
+        tipPercent.maximumValue = Float(maxTipPercent) ?? 50
         
         let maxSplit = defaults.object(forKey: "maxSplitNumber") as? String ?? "4"
         print(maxSplit)
-        splitNum.maximumValue = Float(maxSplit)!
+        splitNum.maximumValue = Float(maxSplit) ?? 4
     }
     
     override func viewDidLoad() {
