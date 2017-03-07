@@ -13,7 +13,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var billAmount: UITextField!
     @IBOutlet weak var tipAmount: UILabel!
     @IBOutlet weak var totalAmount: UILabel!
-    @IBOutlet weak var tipPercentSeg: UISegmentedControl!
+    
+    @IBOutlet weak var tipPercent: UISlider!
+    @IBOutlet weak var splitNum: UISlider!
+    
+    @IBOutlet weak var splitAmount: UILabel!
+    @IBOutlet weak var tipPercentLabel: UILabel!
+    @IBOutlet weak var splitLabel: UILabel!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let defaults = UserDefaults.standard
+        
+        let maxTipPercent = defaults.object(forKey: "maxTipPercent") as? String ?? "50"
+        print(maxTipPercent)
+        
+        tipPercent.maximumValue = Float(maxTipPercent)!
+        
+        let maxSplit = defaults.object(forKey: "maxSplitNumber") as? String ?? "4"
+        print(maxSplit)
+        splitNum.maximumValue = Float(maxSplit)!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +46,18 @@ class ViewController: UIViewController {
     }
 
     @IBAction func amountChanged(_ sender: AnyObject) {
-        let tipScale = [0.15, 0.2, 0.25]
+        
         let bill = Double(billAmount.text!) ?? 0
-        let tip = bill * tipScale[tipPercentSeg.selectedSegmentIndex]
+        let tip = bill * Double(Int(tipPercent.value)) / 100
         let total = bill + tip
+        let split = total / Double(Int(splitNum.value))
         
         tipAmount.text = String(format: "$%.2f", tip)
         totalAmount.text = String(format: "$%.2f",total)
+        splitAmount.text = String(format: "$%.2f",split)
+        
+        tipPercentLabel.text = String(format: "%d%%", Int(tipPercent.value))
+        splitLabel.text = String(format: "%d", Int(splitNum.value))
         
     }
     

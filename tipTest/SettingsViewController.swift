@@ -9,11 +9,22 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+    @IBOutlet weak var maxTipPercent: UITextField!
+    @IBOutlet weak var maxSplitNumber: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(maxTipPercent.text, forKey: "maxTipPercent")
+        defaults.set(maxSplitNumber.text, forKey: "maxSplitNumber")
+        defaults.synchronize()
+        super.viewWillDisappear(animated)
     }
 
     override func didReceiveMemoryWarning() {
