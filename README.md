@@ -31,7 +31,7 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-https://github.com/newweihua/codePath/blob/master/tipCal.gif
+![alt text](https://github.com/newweihua/codePath/blob/master/tipCal.gif)
 
 ## Notes
 
